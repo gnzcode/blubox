@@ -1,0 +1,308 @@
+---
+layout: ../layouts/Layout.astro
+title: Blubox - Fast, efficient and minimalist web framework
+description: Blubox is a web framework created with the purpose of being as fast, minimalist and efficient as possible, in addition to providing a friendly way of working for the developer.
+---
+
+<header class="header">
+
+# Blubox
+
+Fast, efficient and minimalist web framework
+
+</header>
+
+<section class="section section--dark">
+
+<div>
+
+## Introduction
+
+Blubox is a web framework designed with a clear objective, to be fast and minimalist, designed to be developer friendly and easy to understand regardless of the level. With Blubox you can develop APIs in a simple and customizable way, either with official Blubox middlewares or created by the community.
+
+</div>
+
+</section>
+
+<section class='section'>
+
+<div>
+
+## Installation
+
+Blubox requires v12 or higher version of nodejs compatible with ES2015 version and asynchronous function support.
+
+```bash
+npm install blubox
+```
+
+<br />
+
+## Application
+
+The Blubox application is an object with which you can create the Blubox http server or access the function in charge of handling incoming requests and transferring them to the corresponding controller.
+
+When creating the Blubox application object, it is necessary to pass a [`router`](#routers) instance to the constructor.
+
+```js
+const { App, Router } = require('blubox')
+
+const router = new Router({
+	/* controllers */
+})
+
+const app = new App(router)
+
+app.listen(3000, () => {
+	console.log('Server listen on port 3000')
+})
+```
+
+### app.listen(...)
+
+This method creates and returns an http server, receives the port as a parameter and secondly a callback function that will be executed when the server is initialized.
+
+### app.callback()
+
+This method returns the function responsible for handling incoming requests and redirects them to the corresponding controller.
+
+```js
+const { App, Router } = require('blubox')
+
+const router = new Router({
+	/* controllers */
+})
+
+const app = new App(router)
+
+const callback = app.callback()
+```
+
+<br />
+
+## Context
+
+The context is the object passed to the controllers and middlewares, where the request and response of the request are located. In addition, if necessary, you will also find the original Nodejs req and res object.
+
+### API
+
+#### ctx.req
+
+Node's request object.
+
+#### ctx.res
+
+Node's response object
+
+#### ctx.state
+
+Recommended property for passing properties between middlewares and controllers.
+
+#### ctx.cookies
+
+Blubox object to easily manage [`cookies`](#cookies).
+
+#### ctx.request
+
+A Blubox [`request`](#request) object.
+
+#### ctx.response
+
+A Blubox [`response`](#response) object.
+
+<br />
+
+## Request
+
+The Blubox `request` object is an extension of the original Nodejs request object, with additional functionality for easier development.
+
+### API
+
+#### request.method
+
+Request method, it can be: "GET", "POST", "PUT", "PATCH" and "DELETE".
+
+#### request.url
+
+URL of the request.
+
+#### request.headers
+
+Request header object.
+
+#### request.protocol
+
+Protocol of the request.
+
+#### request.hostname
+
+Hostname of the request.
+
+#### request.path
+
+Pathname of the request.
+
+#### request.query
+
+Query object of url.
+
+#### request.params
+
+Params object of url.
+
+<br />
+
+## Response
+
+The Blubox `response` object is a more simplified version of the original Nodejs response object. Its long-term goal is to provide simple methods for returning responses to the client.
+
+This object extends the `Writable` class of the `stream` module.
+
+### API
+
+#### response.send()
+
+Method to send a `string` as a response.
+
+#### response.status(statusCode)
+
+Method to define the status code.
+
+#### response.setHeader(name, value)
+
+Method to add headers to the response.
+
+#### response.json()
+
+Method to send a `json` as a response.
+
+#### response.end()
+
+Mandatory execution method to stop the execution of the program.
+
+<br />
+
+## Cookies
+
+The Blubox `cookies` object is a simple way to interact with `response` and `request` cookies.
+
+#### API
+
+### get(name)
+
+Retrieves the value of a specific cookie by name.
+
+#### getValues()
+
+Gets an object that contains all the cookies and their associated values.
+
+#### set(name, value, [options])
+
+Sets a cookie with the given name, value, and options.
+
+- `name`: Name of the cookie.
+- `value`: Cookie value.
+- `options`: Additional options for the cookie (optional).
+
+#### remove(name)
+
+Delete a cookie specified by name
+
+<br />
+
+## Middlewares
+
+The Blubox `middleware` object allows you to create functions that run before the [`controller`](#controllers).
+
+```js
+const { Middleware, Controller } = require('blubox')
+
+const controller = new Controller()
+
+const middleware = new Middleware((ctx, next) => {
+	console.log('Hello from middleware.')
+	next()
+})
+
+controller.use(middleware)
+```
+
+<br />
+
+## Controllers
+
+The Blubox `controller` object is a simple way to encapsulate the logic to be executed in each request, this prevents it from being strictly related to the application.
+
+```js
+const { Controller } = require('blubox')
+
+const controller = new Controller()
+```
+
+### API
+
+#### controller.use(...middleware)
+
+Receive as many middlewares as required.
+
+#### controller.get(handler)
+
+Create the callback function to execute, receive the [`context`](#context).
+
+```js
+const { Controller } = require('blubox')
+
+const controller = new Controller()
+
+controller.get(ctx => {
+	/* Your code */
+})
+```
+
+Likewise, you can use the other methods for the different request methods.
+
+```js
+const { Controller } = require('blubox')
+
+const controller = new Controller()
+
+controller.get(...) // GET METHOD
+
+controller.post(...) // POST METHOD
+
+controller.patch(...) // PATCH METHOD
+
+controller.put(...) // PUT METHOD
+
+controller.delete(...) // GET METHOD
+```
+
+<br />
+
+## Routers
+
+The Blubox `router` object is responsible for managing the different drivers, it receives the drivers to use as parameters, and it even allows nesting different routers.
+
+```js
+const { Router } = require('blubox')
+
+const users = new Router({
+	/* Users controllers */
+})
+
+const router = new Router({
+	users,
+	/* Other controllers */
+})
+```
+
+<br />
+
+## Links
+
+- Github: [https://github.com/gnzcode/blubox](https://github.com/gnzcode/blubox)
+- Discord: [https://discord.gg/KkXDXARzX9](https://discord.gg/KkXDXARzX9)
+
+</div>
+
+</section>

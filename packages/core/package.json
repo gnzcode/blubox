@@ -1,0 +1,33 @@
+{
+	"name": "blubox",
+	"description": "Fast, efficient and minimalist web framework",
+	"version": "1.0.2",
+	"keywords": [
+		"blubox",
+		"framework",
+		"web",
+		"http",
+		"rest",
+		"api",
+		"restful",
+		"router"
+	],
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gnzcode/blubox.git"
+	},
+	"author": "Gnzcode <contact@gnzcode.com>",
+	"license": "MIT",
+	"homepage": "https://bluboxs.com/",
+	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+		"build": "tsup src/index.ts --format cjs,esm --dts --minify terser",
+		"prepublishOnly": "npm run build"
+	}
+}

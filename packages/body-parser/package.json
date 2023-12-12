@@ -1,0 +1,40 @@
+{
+	"name": "@blubox/body-parser",
+	"version": "1.0.1",
+	"description": "Body Parser for Blubox",
+	"keywords": [
+		"body-parser",
+		"blubox-body-parser",
+		"blubox",
+		"@blubox/body-parser"
+	],
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gnzcode/blubox.git"
+	},
+	"author": "Gnzcode <contact@gnzcode.com>",
+	"license": "MIT",
+	"homepage": "https://bluboxs.com/",
+	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+		"build": "tsup src/index.ts --format cjs,esm --dts --minify terser",
+		"prepublishOnly": "npm run build"
+	},
+	"peerDependencies": {
+		"blubox": ">=1.0.1"
+	},
+	"devDependencies": {
+		"@types/formidable": "^3.4.5",
+		"@types/xml2js": "^0.4.14",
+		"xml2js": "^0.6.2"
+	},
+	"dependencies": {
+		"formidable": "3.5.1"
+	}
+}

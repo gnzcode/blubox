@@ -1,0 +1,107 @@
+---
+const items = [
+	{
+		id: '#introduction',
+		name: 'Introduction',
+	},
+	{
+		id: '#installation',
+		name: 'Installation',
+	},
+	{
+		id: '#application',
+		name: 'Application',
+	},
+	{
+		id: '#request',
+		name: 'Request',
+	},
+	{
+		id: '#response',
+		name: 'Response',
+	},
+	{
+		id: '#cookies',
+		name: 'Cookies',
+	},
+	{
+		id: '#middlewares',
+		name: 'Middlewares',
+	},
+	{
+		id: '#controllers',
+		name: 'Controllers',
+	},
+	{
+		id: '#routers',
+		name: 'Routers',
+	},
+	{
+		id: '#links',
+		name: 'Links',
+	},
+]
+---
+
+<nav class='nav'>
+	<div class='nav__container'>
+		<button class='nav__button'
+			><svg
+				xmlns='http://www.w3.org/2000/svg'
+				class='icon icon-tabler icon-tabler-menu-2'
+				width='24'
+				height='24'
+				viewBox='0 0 24 24'
+				stroke-width='2'
+				stroke='currentColor'
+				fill='none'
+				stroke-linecap='round'
+				stroke-linejoin='round'
+				><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M4 6l16 0'></path><path
+					d='M4 12l16 0'></path><path d='M4 18l16 0'></path></svg
+			></button
+		>
+		<menu class='nav__menu'>
+			{items.map(item => <a href={item.id}>{item.name}</a>)}
+		</menu>
+	</div>
+</nav>
+
+<style>
+	.nav {
+		position: fixed;
+		right: 2rem;
+		top: 2rem;
+	}
+
+	.nav__container {
+		position: relative;
+	}
+
+	.nav__container:hover .nav__menu {
+		display: flex;
+	}
+
+	.nav__menu {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		flex-direction: column;
+		padding: 0.75rem;
+		background-color: #fff;
+		border: solid #ececec 0.1rem;
+		border-radius: 0.25rem;
+		width: 10rem;
+		display: none;
+	}
+
+	.nav__menu a {
+		padding: 0.25rem 0.5rem;
+		font-size: 0.875rem;
+		width: 100%;
+	}
+
+	.nav__menu a:hover {
+		text-decoration: underline;
+	}
+</style>

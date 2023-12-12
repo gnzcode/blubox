@@ -1,0 +1,24 @@
+{
+	"name": "bluboxs",
+	"version": "1.0.0",
+	"description": "Fast, efficient and minimalist web framework",
+	"author": "Gnzcode <contact@gnzcode.com>",
+	"workspaces": [
+		"packages/*"
+	],
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^20.10.4",
+		"@typescript-eslint/eslint-plugin": "^6.13.2",
+		"bun-types": "latest",
+		"eslint": "^8.55.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-config-standard-with-typescript": "^40.0.0",
+		"eslint-plugin-import": "^2.29.0",
+		"eslint-plugin-n": "^16.3.1",
+		"eslint-plugin-promise": "^6.1.1",
+		"terser": "^5.25.0",
+		"tsup": "^8.0.1",
+		"typescript": "^5.3.2"
+	}
+}
